@@ -1,4 +1,8 @@
 
+# PDFMake Builder
+
+> Provides a declarative syntax to create PDFs with ease
+
 ```javascript
 const builder = null
 

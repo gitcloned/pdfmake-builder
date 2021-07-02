@@ -1,5 +1,5 @@
 {
-  "name": "ds-pdfmake-builder",
+  "name": "pdfmake-builder",
   "version": "1.0.0",
   "description": "```javascript\r const builder = null",
   "main": "index.js",

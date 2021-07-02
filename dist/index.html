@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PDF Make Builder Client Side Sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="/client.e31bb0bc.js"></script>
+</head>
+
+<body>
+
+    <script>DEFAULTS.Font = FONTS.Roboto;
+var report = new PDFReport().content(builder.Text("Hello PDF"), builder.Column(builder.Row(builder.Text("Header 1").props({
+  bold: true
+}), builder.Text("This is large content!! ")), builder.Row(builder.Text("Header 2").props({
+  bold: true
+}), builder.Text("This is large content"))));
+report.definition().then(function (definition) {
+  pdfMake.createPdf(definition).open({}, window);
+});</script>
+</body>
+
+</html>

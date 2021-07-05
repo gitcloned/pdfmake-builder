@@ -29,8 +29,10 @@ new PDFReport()
         )
     )
     .font(FONTS.Courier, setDefault = true)
-    .stream()
-    .then(stream => {
+    .createPDF()
+    .then(pdf => {
+
+        const stream = pdf.stream()
 
         stream.pipe(require('fs').createWriteStream('SimpleTable.pdf'))
         stream.end()

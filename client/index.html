@@ -8,9 +8,107 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <script src='./index.js'></script>
+
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+
+        body>div {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            ;
+        }
+
+        body>div>div {
+            flex: 0 1 50%;
+            height: 100%;
+            border: 1px solid cadetblue;
+            text-align: center;
+        }
+
+        body>div>div:first-child>ul>li {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        body>div>div:first-child>ul>li code {
+            background-color: #eee;
+            border: 1px solid #999;
+            display: block;
+            padding: 20px;
+        }
+
+        .fullWidthHeight {
+            width: 100%;
+            height: 100%;
+        }
+
+        pre {
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
+
+    <div>
+
+        <div>
+            <ul>
+                <li>
+                    <button onclick="javascript:PDF.openInNewWindow()">Open in new window</button>
+                </li>
+                <li>
+                    <button onclick="javascript:PDF.open()">Open in current window</button>
+                </li>
+                <li>
+                    <button onclick="javascript:PDF.printInNewWindow()">Print in new window</button>
+                </li>
+                <li>
+                    <button onclick="javascript:PDF.print()">Print in current window</button>
+                </li>
+                <li>
+                    <button onclick="javascript:PDF.download('Simple PDF.pdf')">Download</button>
+                </li>
+                <li>
+                    <button onclick="javascript:PDF.renderInContainer(document.getElementById('container'), 'fullWidthHeight')">Render in container</button>
+                </li>
+            </ul>
+
+            <pre>
+                <code>
+DEFAULTS.Font = FONTS.Roboto
+
+let report = new PDFReport()
+    .content(
+        builder.Text("Hello PDF"),
+        builder.Column(
+            builder.Row(
+                builder.Text("Header 1").props({ bold: true }),
+                builder.Text("This is large content!! ")
+            ),
+            builder.Row(
+                builder.Text("Header 2").props({ bold: true }),
+                builder.Text("This is large content")
+            )
+        )
+    );
+
+report.createPDF().then(pdf => {
+
+    window.PDF = pdf
+
+    // pdf.open()
+    // pdf.print()
+})
+                </code>
+            </pre>
+        </div>
+        <div id="container"></div>
+    </div>
 
     <script type="text/javascript">
 
@@ -29,9 +127,12 @@
                         builder.Text("This is large content")
                     )
                 )
-            )
+            );
 
-        report.definition().then((definition) => { pdfMake.createPdf(definition).open({}, window); })
+        report.createPDF().then(pdf => {
+
+            window.PDF = pdf
+        })
     </script>
 </body>
 
